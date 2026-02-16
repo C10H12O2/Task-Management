@@ -14,7 +14,15 @@ def validate_task_title(title):
 
 
 def validate_task_description(description):
-    None
+    if description and len(description) > 400:
+        print("Error: Task description cannot exceed 400 characters.")
+        return False
+    
+    if description and len(description) < 10:
+        print("Error: Task description must be at least 10 characters long.")
+        return False
+    
+    return True
 
 
 def validate_due_date(due_date):
