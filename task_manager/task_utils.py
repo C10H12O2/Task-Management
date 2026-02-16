@@ -69,5 +69,33 @@ def view_pending_tasks(tasks=tasks):
 
 # Implement calculate_progress function
 def calculate_progress(tasks=tasks):
-    None
+    total_tasks = len(tasks)
+    if total_tasks == 0:
+        print ("\n No tasks to track as you didnt even add any.")
+        progress = {
+            "total_tasks": 0,
+            "completed_tasks": 0,
+            "pending_tasks": 0,
+            "progress_percentage": 0.0
+        }
+        return progress
+
+    completed_tasks = sum(1 for task in tasks if task["completed"])
+    pending_tasks = total_tasks - completed_tasks
+    progress_percentage = (completed_tasks / total_tasks * 100) if total_tasks > 0 else 0
+    
+    print("\n" + "=" * 60)
+    print("Progress stats:")
+    print("=" * 60)
+    print(f"Total Tasks: {total_tasks}")
+    print(f"Completed Tasks: {completed_tasks}")
+    print(f"Pending Tasks: {pending_tasks}")
+    print(f"Progress Percentage: {progress_percentage:.2f}%")
+    
+    progress = {
+        "total_tasks": total_tasks,
+        "completed_tasks": completed_tasks,
+        "pending_tasks": pending_tasks,
+        "progress_percentage": progress_percentage
+    }
     return progress
